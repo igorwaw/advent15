@@ -35,3 +35,7 @@ generic than required: I added class Santa to hold all the data and a list holdi
 #### Day 4: The Ideal Stocking Stuffer
 
 Same as day 2.
+
+#### Day 5: Doesn't He Have Intern-Elves For This?
+
+Bleh. Regex with backreference.
