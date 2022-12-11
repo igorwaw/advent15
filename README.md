@@ -25,3 +25,13 @@ logic was just increment/decrement/comparison. C seemed a good choice.
 
 Still simple. Some quick Python and it's done. Could be make faster, shorter etc., could be made in C,
 but I didn't bother, more interesting puzzles were waiting.
+
+#### Day 3: Perfectly Spherical Houses in a Vacuum
+
+For part 1 I wrote some quick and dirty code again. Part 2 was interesting: we now got 2 Santas and need to keep
+track of location and visited houses for them separately. So I decided to rewrite the code and do a solution more
+generic than required: I added class Santa to hold all the data and a list holding arbitrary number of Santas.
+
+#### Day 4: The Ideal Stocking Stuffer
+
+Same as day 2.
