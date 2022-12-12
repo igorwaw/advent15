@@ -13,6 +13,8 @@ required because I felt like it, for others I went straight to the point.
 Task 1 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C compiler.
 Task 2 solved with Python. Tested with 3.10.8, should work with any Python3
 
+Extra Python libraries:
+* pygame for task 9
 
 ## Tasks
 
@@ -39,3 +41,8 @@ Same as day 2.
 #### Day 5: Doesn't He Have Intern-Elves For This?
 
 Bleh. Regex with backreference.
+
+#### Day 6: Probably a Fire Hazard
+
+Now that's more like it! The instruction only said to count how many lights are lit, but I couldn't resist
+the temptation to add visualization.
