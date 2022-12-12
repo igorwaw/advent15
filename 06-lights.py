@@ -8,7 +8,7 @@ import pygame
 INPUTFILE="06-input.txt"
 WIDTH=1000
 HEIGHT=1000
-FPS=500 # how many animation frames / calculation steps per second
+FPS=25 # how many animation frames / calculation steps per second
 
 cwhite=(255,255,255)
 cblack=(0,0,0)
@@ -84,7 +84,4 @@ with open(INPUTFILE) as inputfile:
     #end event loop, cleanup here
     pygame.quit()
     lit=sum(map(sum,lights))
-    #for row in range(HEIGHT):
-    #    for col in range(WIDTH):
-    #        lit+=lights[row][col]
     print(f"Lights on: {lit}, off: {WIDTH*HEIGHT-lit}")

@@ -11,6 +11,8 @@ HEIGHT=1000
 FPS=500 # how many animation frames / calculation steps per second
 
 cwhite=(255,255,255)
+cgrey1=(180,180,180)
+cgrey2=(220,220,220)
 cblack=(0,0,0)
 
 # global variables
@@ -35,7 +37,6 @@ def rect_on(x1, y1, x2, y2):
     for i in range(x1, x2+1):
         for j in range(y1, y2+1):
             lights[i][j]+=1
-    pygame.draw.rect(screen, cwhite, pygame.Rect(x1,y1,x2-x1,y2-y1))
     
 
 def rect_off(x1, y1, x2, y2):
@@ -43,14 +44,12 @@ def rect_off(x1, y1, x2, y2):
         for j in range(y1, y2+1):
             lights[i][j]-=1
             if (lights[i][j]<0): lights[i][j]=0
-    pygame.draw.rect(screen, cblack, pygame.Rect(x1,y1,x2-x1,y2-y1))
 
 
 def rect_toggle(x1, y1, x2, y2):
     for i in range(x1, x2+1):
         for j in range(y1, y2+1):
             lights[i][j]+=2
-    pygame.draw.rect(screen, cwhite, pygame.Rect(x1,y1,x2-x1,y2-y1))
 
 # initialize pygame
 pygame.init()
@@ -65,20 +64,30 @@ running=True
 # initialize the rest
 lights = [[0 for col in range(WIDTH)] for row in range(HEIGHT)]
 with open(INPUTFILE) as inputfile:
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT: running=False
+    for line in inputfile:
+        run_cmd(line)
 
-        if (line := inputfile.readline().rstrip()):
-            run_cmd(line)
-        pygame.display.flip()
-        clock.tick(FPS) # wait here
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: running=False
+    for i in range(0, WIDTH):
+        for j in range(0, HEIGHT):
+            if lights[i][j]==0:
+                screen.set_at((i,j), cblack)
+            elif lights[i][j]<=10:
+                screen.set_at((i,j), cgrey1)
+            elif lights[i][j]<=20:
+                screen.set_at((i,j), cgrey2)
+            elif lights[i][j]>20:
+                screen.set_at((i,j), cwhite)
+    pygame.display.flip()
+    clock.tick(FPS) # wait here
 
         
-    #end event loop, cleanup here
-    pygame.quit()
-    lit=sum(map(sum,lights))
-    #for row in range(HEIGHT):
-    #    for col in range(WIDTH):
-    #        lit+=lights[row][col]
-    print(f"Total brightness: {lit}")
+#end event loop, cleanup here
+pygame.quit()
+lit=sum(map(sum,lights))
+#for row in range(HEIGHT):
+#    for col in range(WIDTH):
+#        lit+=lights[row][col]
+print(f"Total brightness: {lit}")
