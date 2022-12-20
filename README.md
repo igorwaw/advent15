@@ -25,7 +25,7 @@ logic was just increment/decrement/comparison. C seemed a good choice.
 
 #### Day 2: I Was Told There Would Be No Math
 
-Still simple. Some quick Python and it's done. Could be make faster, shorter etc., could be made in C,
+Still simple. Some quick Python and it's done. Could be made faster, shorter etc., could be made in C,
 but I didn't bother, more interesting puzzles were waiting.
 
 #### Day 3: Perfectly Spherical Houses in a Vacuum
