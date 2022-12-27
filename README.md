@@ -14,7 +14,8 @@ Task 1 solved with C. I used C99 standard and only tested with GCC 12.2.0, but i
 Task 2 solved with Python. Tested with 3.10.8, should work with any Python3
 
 Extra Python libraries:
-* pygame for task 9
+* pygame for task 6
+* parsimonious for task 7
 
 ## Tasks
 
@@ -46,3 +47,20 @@ Bleh. Regex with backreference.
 
 Now that's more like it! The instruction only said to count how many lights are lit, but I couldn't resist
 the temptation to add visualization.
+
+#### Day 7: Some Assembly Required
+
+We've got a list of wires that feed signals to other wires through logic gates. We need to know the state of the wire a,
+but for that we need to know the state of the wire lx first. And lx references 2 other wires and so on, until we get
+to the wires that have their state directly in the input file. I chose a simple solution:
+* iterate through the whole list of wires,
+* at each iteration do all calculations that are possible (the data is already available)
+* I thought it would be cool to see how we get to the result, so I used curses to display the state of the wires in columns, update
+in place and introduce a configurable delay.
+
+For parsing the input file I borrowed the solution from https://aoc.just2good.co.uk/2015/7 and used the Parsimonious library.
+In the simple case like this it would be faster to use string split, list unpacking and maybe a few simple regexps. But I'm
+doing a lot of parsing in the Advent of Code and the formats are getting more complicated, so it's a good idea to learn a
+proper tool.
+
+#### Day 8: Matchsticks
