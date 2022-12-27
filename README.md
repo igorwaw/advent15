@@ -10,8 +10,9 @@ required because I felt like it, for others I went straight to the point.
 
 ![Python](https://img.shields.io/badge/python-3-blue) ![C](https://img.shields.io/badge/C-C99-green)
 
-Task 1 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C compiler.
-Task 2 solved with Python. Tested with 3.10.8, should work with any Python3
+Task 1 and 8 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C compiler.
+Other tasks solved with Python. Tested with 3.6.8 and 3.10.8, should work with any Python3 - except for task 6 which 
+requires at least 3.8 (I used the walrus operator).
 
 Extra Python libraries:
 * pygame for task 6
@@ -46,7 +47,8 @@ Bleh. Regex with backreference.
 #### Day 6: Probably a Fire Hazard
 
 Now that's more like it! The instruction only said to count how many lights are lit, but I couldn't resist
-the temptation to add visualization.
+the temptation to add visualization. It's updated on every iteration for part1, but for part2 it's only
+updated once in the end (it would slow the calculations too much).
 
 #### Day 7: Some Assembly Required
 
@@ -64,3 +66,9 @@ doing a lot of parsing in the Advent of Code and the formats are getting more co
 proper tool.
 
 #### Day 8: Matchsticks
+
+The next puzzle is about encoding special characters in strings, only for a few special cases. And I didn't even need to
+encode anything, just count the difference in length. 
+
+I like to use C for such stuff. I can be sure the language is not doing any processing behind my back. And I don't mind
+working with low-level code as there was no need for dynamic memory and data structures other than arrays.
