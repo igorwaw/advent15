@@ -12,13 +12,14 @@ number of characters in memory for string values
 #include <stdio.h>
 #include <stdbool.h>
 
-const char* FILENAME="08-small.txt";
+const char* FILENAME="08-input.txt";
 const int MAXSTR=200; // max line length
 
 int main() {
     FILE* fileptr;
     int byte_counter=0;
     int char_counter=0;
+    int encoded_counter=0;
     int line_counter=0;
     char line[MAXSTR];
     fileptr = fopen(FILENAME, "r");
@@ -33,6 +34,7 @@ int main() {
         ++line_counter;
         int byte_current=0;
         int char_current=0;
+        int encoded_current=4;   // each line grows by at least 4 chars
         //printf("Parsing line %d: %s",line_counter, line);
         for (int i=0;i<MAXSTR;++i) { // parse characters of the line
             ++byte_current;
@@ -47,11 +49,14 @@ int main() {
                     saw_first_quotation=true;
             }
             else if (line[i]=='\\') {
-                //putchar('\\'); // need to check the next character
+                ++encoded_current;
+                // need to check the next character
                 ++i;
                 ++byte_current;
-                if (line[i]=='\\' || line[i]=='"')
+                if (line[i]=='\\' || line[i]=='"') {
                     ++char_current;
+                    ++encoded_current;
+                }
                 else if (line[i]=='x') {
                     // 2-digit hex code, need to skip 2 more bytes
                     byte_current+=2;
@@ -63,12 +68,16 @@ int main() {
             else // ordinary character
                 ++char_current;
         } // end for / parse characters of the line
-        //printf ("bytes: %d, characters: %d \n", byte_current, char_current);
+        encoded_current+=byte_current;
+        //printf ("bytes: %d, characters: %d, encoded: %d \n", byte_current, char_current, encoded_current);
         byte_counter+=byte_current;
         char_counter+=char_current;
+        encoded_counter+=encoded_current;
     } // end while / parse file
     printf("Number of lines: %d\n",line_counter);
     printf("Number of bytes: %d\n",byte_counter);
     printf("Number of characters: %d\n",char_counter);
+    printf("Number of encoded: %d\n",encoded_counter);
     printf("Part 1: difference: %d\n", byte_counter-char_counter);
+    printf("Part 2: difference: %d\n", encoded_counter-byte_counter);
 }
