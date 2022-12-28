@@ -38,7 +38,7 @@ to the wires that have their state directly in the input file. I chose a simple 
 * I thought it would be cool to see how we get to the result, so I used curses to display the state of the wires in columns,
 update in place and introduce a configurable delay.
 
-![screenshot](https://github.com/igorwaw/advent15/blob/main/img/day7.png)
+![screenshot](https://github.com/igorwaw/advent15/blob/master/img/day7.png)
 
 For parsing the input file I borrowed the solution from https://aoc.just2good.co.uk/2015/7 and used the Parsimonious library.
 In the simple case like this it would be faster to use string split, list unpacking and maybe a few simple regexps. But I'm
