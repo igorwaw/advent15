@@ -21,8 +21,8 @@ logger.setLevel(logging.INFO)
 
 INPUTFILE="07-input.txt"
 COLWIDTH=20  
-#DELAY=300 # 300ms delay to see how signals are calculated
-DELAY=0 # or no delay to get the answer sooner
+DELAY=300 # 300ms delay to see how signals are calculated
+#DELAY=0 # or no delay to get the answer sooner
 
 grammar = Grammar(r"""
     expr = input? (op input)? feeds wire
