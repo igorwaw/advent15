@@ -95,7 +95,7 @@ and list of route lengths, initially empty (note that we only need to store the 
 * and just get the smallest number from the list
 
 Possible optimization:
-* No need to store the length of every route, we can only store it if it's shortest then the previous ones.
+* No need to store the length of every route, we can only store it if it's shorter than the previous ones.
 * Every route has the same length in both directions, while the code generates all permutations. So, for
 the example data we check Dublin -> London -> Belfast and Belfast -> London -> Dublin. We could cut
 the problem size in half by filtering out those.
