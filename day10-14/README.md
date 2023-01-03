@@ -37,3 +37,23 @@ recurse into lists and dictionaries.
 
 Note that explicit type checking is usually frowned upon by Python programmers, but I
 believe it's the right tool for this job.
+
+# Day 13: Knights of the Dinner Table
+
+Although it doesn't look like that, it's a similar puzzle to day 9, Travelling Santa 
+Problem. So similar that most of my code was actually a copy-paste. Again, it would require
+some sophisticated algorithms for larger dataset, but we only have 8 people so we might as
+well do brute-force.
+
+Spoilers below:
+There are 2 key differences between day 9 (distance finding) and this puzzle:
+* on day 9, you had to sum up distance from A to B, then B to C etc., here you have
+to sum up happiness from A to B and from B to A, B to C and C to B etc.
+* the table is round, so you have to also add happiness between last person and first
+person - the easiest way is to add the first person again at the end.
+
+Possible optimizations: similar to day 9, you can skip sitting arrangements that are
+the reverse of another sitting arrangement, but I didn't bother as the program was fast
+enough. Though I can clearly see how it grows with the size of the dataset: on an old
+laptop it took 0.2s for the first part and 1.4s for the second part with one extra
+person.
