@@ -58,3 +58,8 @@ the reverse of another sitting arrangement, but I didn't bother as the program w
 enough. Though I can clearly see how it grows with the size of the dataset: on an old
 laptop it took 0.2s for the first part and 1.4s for the second part with one extra
 person.
+
+# Day 14: Reindeer Olympics
+
+Simple thing, nothing more than comparisons and additions. I used a simple class to keep
+the data together.
