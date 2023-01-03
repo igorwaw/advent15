@@ -28,6 +28,7 @@ just extract all the numbers and sum them. A simple regular expression will do f
 extracting and classing map/reduce for the sum. I usually prefer a longer code for
 redability's sake, but this just asks for putting all the contents of the main loop in
 one line:
+
         result+=sum( map(int, rx.findall(line) ) )
 
 For part 2, we need to ignore JSON objects (but not lists) that contain a value "red".

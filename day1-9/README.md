@@ -65,7 +65,7 @@ is O(n!) meaning it scales with the factorial of the number of nodes so it's out
 Luckily, we only have 7 cities, 7! is only 5040. There's no need to implement any clever algorithm.
 
 So, it's Python again with no special libraries (C++ with the usual STL containers would also work):
-* read input file, parse lines (just two strip(), nothing fancy)
+* read input file, parse lines (just two split(), nothing fancy)
 * we need 3 data structures: set of cities, dict of distances between cities (both initialized from the input data)
 and list of route lengths, initially empty (note that we only need to store the distance, not the route)
 * iterate through all permutations of cities (Python has a handy function in the standard library)
