@@ -8,8 +8,8 @@ import pygame
 INPUTFILE="18-input.txt"
 WIDTH=100
 HEIGHT=100
-LIGHTSIZE=8 # on the screen each light will be 7x7 pixels
-FPS=100 # how many animation frames / calculation steps per second
+LIGHTSIZE=8 # on the screen each light will be 8x8 pixels
+FPS=5 # how many animation frames / calculation steps per second
 ROUNDS=100
 
 VARIANT=False # set to False for Part1, True for Part2
@@ -114,23 +114,27 @@ done=False
 
 ##########  MAIN LOOP   ###########
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: running=False
     if not done:
-        for i in range(ROUNDS):          
+        for i in range(ROUNDS):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: 
+                    running=False
+            if not running: break             
             if (i%2==0):
-                source=lights1
-                target=lights2
+                source, target = lights1, lights2
             else:
-                source=lights2
-                target=lights1
+                source, target = lights2, lights1
             update_lights(source, target)
             redraw_screen(target)
             lit=sum(map(sum, target))
             write_below(f"Round: {i+1}, lights on: {lit}")
             pygame.display.flip()
-        done=True     
-    clock.tick(FPS) # wait here
+            clock.tick(FPS) # delay here
+        done=True # don't start iterating again, just wait for quit event
+    else:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: running=False
+        clock.tick(FPS) # or here
 
 ##########  ENDGAME  ###########
 

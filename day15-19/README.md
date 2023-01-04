@@ -24,6 +24,8 @@ and combination! Some copy-paste from day 15 and it's done.
 Animated lights, or Conway's Game of Life. As usual, we only need to provide a number for an
 answer, but I couldn't resist making a visualization with Pygame.
 
+![screenshot](https://github.com/igorwaw/advent15/blob/master/img/day18.png)
+
 State of each light depends on the state of it's neighbours. But we can't just go through an
 array calculating and changing a state of each light, because that would affect the outcome for
 the neighbouring lights. My solution is to have 2 arrays of lights, one source and the other target,
