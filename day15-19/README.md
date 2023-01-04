@@ -13,3 +13,8 @@ permutations and that I'm not storing more data than needed.
 Appareantly, I have 500 aunts names Sue, some of which have a small herd of pomeranians and samoyeds.
 I like the story. The puzzle itself is not that interesting, just some basic input file processing
 with regexps (split() would also work) and few comparisons.
+
+# Day 17: No Such Thing as Too Much
+
+Another combinatorics? There's so much I might even finally memorize which one is permutation
+and combination! Some copy-paste from day 15 and it's done.
