@@ -17,8 +17,9 @@ Other tasks solved with Python. Tested with 3.6.8 and 3.10.8, should work with a
 requires at least 3.8 (I used the walrus operator).
 
 Extra Python libraries:
-* pygame for task 6
+* pygame for task 6 and 18
 * parsimonious for task 7
+* tqdm for task 15
 
 ## Tasks
 
