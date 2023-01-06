@@ -37,7 +37,7 @@ It would be a huge concern on a microcontroller with eg. 64KB of RAM, but on a P
 
 I hated this one.
 
-We've got a molecule and a least of possible replacements. First part was too easy: calculate how many
+We've got a molecule and a list of possible replacements. First part was too easy: calculate how many
 molecules can be made with a single replacements. I had to use a tricky way to replace first, second..., nth
 occurence, but that was it.
 
@@ -57,5 +57,6 @@ an electron. I tried running them in different orders, trying to eliminate longe
 end every time.
 
 In desperation, I based my solution on the analisys by CdiTheKing: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/?utm_source=share&utm_medium=web2x&context=3
+
 It feels like cheating because I barely understand the reasoning and couldn't reach it myself. But I don't want
 to spend more time on the puzzle that's no fun.
