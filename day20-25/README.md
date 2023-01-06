@@ -11,7 +11,7 @@ a specified number of presents. And there are several ways.
 * Iterate through all house numbers starting from 1. For each house:
 * Iterate through elves - numbers from 1 to house number, let's call that value i
 * Calculate: house number modulo i, if it's equal to 0, that house get 10*i presents
-
+    
     housenumber=0
     while True:
         numpresents=0
