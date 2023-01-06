@@ -31,4 +31,31 @@ array calculating and changing a state of each light, because that would affect 
 the neighbouring lights. My solution is to have 2 arrays of lights, one source and the other target,
 alternate them every other step. How does it affect the problem size? We have 10 thousands cells and
 Python's bool is really an integer, a whopping 8 bytes on a 64-bit system, so we have 2 arrays of 80 kB.
-It would be a huge concern on a microcontroller with eg. 64KB of RAM, but on a PC that's nothing, 
+It would be a huge concern on a microcontroller with eg. 64KB of RAM, but on a PC that's nothing.
+
+# Day 19: Medicine for Rudolph
+
+I hated this one.
+
+We've got a molecule and a least of possible replacements. First part was too easy: calculate how many
+molecules can be made with a single replacements. I had to use a tricky way to replace first, second..., nth
+occurence, but that was it.
+
+Then the second part: how many steps we need to reach the target molecule from a single electron? I admit I
+had to check how other people did it. It was obvious for me I should check the other way around: from the
+molecule to the electron. And a proper parser should help. I could write them when I was at the uni, but I 
+happily forgot them and hope to never need them again. I'm OK with regexps and such, but I run away screaming
+when I hear about CNF, context-free grammar and so on.
+
+Some people had luck with a randomized brute-force search: try to apply all the replacement rules, if a dead-end
+was reached, shuffle the rules and try again. They said they reached a single electron in only a few shuffles.
+I allowed for 200 thousands and only got some short molecules that couldn't be reduced any further. 
+
+I also tried some order in my replacements. I noticed there are different types of rules: some duplicate the
+element, some generate a group containing Rn, Ar and something in between. Some generate an element from
+an electron. I tried running them in different orders, trying to eliminate longer pieces first. Reached a dead
+end every time.
+
+In desperation, I based my solution on the analisys by CdiTheKing: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/?utm_source=share&utm_medium=web2x&context=3
+It feels like cheating because I barely understand the reasoning and couldn't reach it myself. But I don't want
+to spend more time on the puzzle that's no fun.
