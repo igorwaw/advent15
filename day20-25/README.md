@@ -12,15 +12,15 @@ a specified number of presents. And there are several ways.
 * Iterate through elves - numbers from 1 to house number, let's call that value i
 * Calculate: house number modulo i, if it's equal to 0, that house get 10*i presents
     
-    housenumber=0
-    while True:
-        numpresents=0
-        housenumber+=1
-        for i in range(1,housenumber+1):
-            if housenumber%i==0:
-                numpresents+=10*i
-        if numpresents>=TARGETNUMBER:
-            break
+        housenumber=0
+        while True:
+            numpresents=0
+            housenumber+=1
+            for i in range(1,housenumber+1):
+                if housenumber%i==0:
+                    numpresents+=10*i
+            if numpresents>=TARGETNUMBER:
+                break
 
 Easy to think of, easy to code. The only problem: it would take a long time (my input is an 8-digit number).
 

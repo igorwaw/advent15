@@ -19,7 +19,7 @@ requires at least 3.8 (I used the walrus operator).
 Extra Python libraries:
 * pygame for task 6 and 18
 * parsimonious for task 7
-* tqdm for task 15
+* tqdm for task 15 and 20 (progress bar, can be removed)
 
 ## Tasks
 
