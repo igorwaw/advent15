@@ -55,3 +55,15 @@ and step in the loop, massively speeding up the calculation
 Not the solution I would find by myself, since I'm more into loops and data structures than divisors and such
 stuff. Just for completeness: each house gets 10 presents if it's number is divisible by the elf's number.
 So, total number of presents equals to 10 times sum of all house number's divisors (including trivial divisors).
+
+# Day 21: RPG Simulator 20XX
+
+Easy one for a change: a part of a very simple RPG game. I used Python and some basic OOP to encapsulate
+data. The player has to use a weapon, can use an armor and up to 2 rings. My design decisions:
+- weapon, armor and rings are all objects of the same class - GameItem
+- all 4 equipment slots are obligatory to simplify the design, I just added armor and ring of type "none"
+
+We need to find the lowest cost of equipment that would win the fight. Easy, there's only 1290 combinations
+so we can just use brute force: generate 1290 players, make them all fight with the boss, create a list of
+cost for the winning players and find a minimum of that list. These are all very fast operations (integer addition,
+substraction and comparison) so it all runs in just some miliseconds.
