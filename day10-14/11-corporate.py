@@ -31,8 +31,7 @@ def rule2(text: str) -> bool:  # does not contain forbidden characters
     return True
 
 def rule3(text: str) -> bool:  # contains at least 2 different pairs
-    pairsearch=rx1.search(text)
-    if pairsearch: # found 2 pairs
+    if pairsearch := rx1.search(text):
         pair1, pair2= pairsearch.groups()
         if pair1 != pair2: # and they are different
                 return True

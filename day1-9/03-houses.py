@@ -22,7 +22,7 @@ class Santa:
 
 def santatour(numsantas: int=1):
     counter=0 # instruction counter
-    santas = [ Santa() for i in range(numsantas)]
+    santas = [Santa() for _ in range(numsantas)]
     with open(INPUTFILE) as inputfile:
         while True:
             s=counter%numsantas

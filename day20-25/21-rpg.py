@@ -1,30 +1,18 @@
 #!/usr/bin/python3
+from dataclasses import dataclass
 
-
+@dataclass
 class GameItem:
     name: str
     cost: int
     damage: int
     armor: int
 
-    def __init__(self, name: str, cost: int, damage: int, armor: int) -> None:
-        self.name=name
-        self.cost=cost
-        self.damage=damage
-        self.armor=armor
-
+@dataclass
 class Boss:
     totaldamage: int
     totalarmor: int
     hitpoints: int
-    def __init__(self, damage: int, armor: int, hp: int) -> None:
-        self.totaldamage=damage
-        self.totalarmor=armor
-        self.hitpoints=hp
-
-    def __repr__(self) -> str:
-        return f"Boss:  hp: {self.hitpoints}  armor: {self.totalarmor} damage: {self.totaldamage}"
-
 
 class Player:
     totalcost: int
@@ -44,13 +32,11 @@ class Player:
     def __repr__(self) -> str:
         return f"Player:  hp: {self.hitpoints}  cost: {self.totalcost} armor: {self.totalarmor} damage: {self.totaldamage}"
 
-    def fight(self, Boss):
+    def fight(self, boss):
         while True:
-            #print(self)
-            #print(boss)
             # player attacks
             damage_done=self.totaldamage-boss.totalarmor
-            if damage_done<1: damage_done=1
+            damage_done = max(damage_done, 1)
             boss.hitpoints-=damage_done
             if boss.hitpoints<=0:
                 self.won=True
@@ -58,7 +44,7 @@ class Player:
                 break
             # boss attacks
             damage_done=boss.totaldamage-self.totalarmor
-            if damage_done<1: damage_done=1
+            damage_done = max(damage_done, 1)
             self.hitpoints-=damage_done
             if self.hitpoints<=0:
                 self.won=False
@@ -106,7 +92,7 @@ for w in weapons:
 
 
 for p in players:
-    boss=Boss(damage=9, armor=2, hp=103)
+    boss=Boss(totaldamage=9, totalarmor=2, hitpoints=103)
     p.fight(boss)
  
 

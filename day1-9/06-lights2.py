@@ -43,7 +43,7 @@ def rect_off(x1, y1, x2, y2):
     for i in range(x1, x2+1):
         for j in range(y1, y2+1):
             lights[i][j]-=1
-            if (lights[i][j]<0): lights[i][j]=0
+            lights[i][j] = max(lights[i][j], 0)
 
 
 def rect_toggle(x1, y1, x2, y2):
@@ -62,7 +62,7 @@ running=True
 
 
 # initialize the rest
-lights = [[0 for col in range(WIDTH)] for row in range(HEIGHT)]
+lights = [[0 for _ in range(WIDTH)] for _ in range(HEIGHT)]
 with open(INPUTFILE) as inputfile:
     for line in inputfile:
         run_cmd(line)
@@ -70,20 +70,20 @@ with open(INPUTFILE) as inputfile:
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: running=False
-    for i in range(0, WIDTH):
-        for j in range(0, HEIGHT):
+    for i in range(WIDTH):
+        for j in range(HEIGHT):
             if lights[i][j]==0:
                 screen.set_at((i,j), cblack)
             elif lights[i][j]<=10:
                 screen.set_at((i,j), cgrey1)
             elif lights[i][j]<=20:
                 screen.set_at((i,j), cgrey2)
-            elif lights[i][j]>20:
+            else:
                 screen.set_at((i,j), cwhite)
     pygame.display.flip()
     clock.tick(FPS) # wait here
 
-        
+
 #end event loop, cleanup here
 pygame.quit()
 lit=sum(map(sum,lights))

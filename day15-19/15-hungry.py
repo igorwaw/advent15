@@ -44,10 +44,10 @@ class Cookie:
             flavor += amount*ingredients[num].flavor
             texture += amount*ingredients[num].texture
             self.calories += amount*ingredients[num].calories
-        if capacity<0: capacity=0
-        if durability<0: durability=0
-        if flavor<0: flavor=0
-        if texture<0: texture=0
+        capacity = max(capacity, 0)
+        durability = max(durability, 0)
+        flavor = max(flavor, 0)
+        texture = max(texture, 0)
         self.totalscore=capacity*durability*flavor*texture
 
 
@@ -76,9 +76,8 @@ for recipe in tqdm(ingr_permutations):
     cookie=Cookie(recipe)
     if cookie.totalscore>maxscore:
         maxscore=cookie.totalscore
-    if cookie.calories==TARGETCALORIES:
-        if cookie.totalscore>maxwithtarget:
-            maxwithtarget=cookie.totalscore
+    if cookie.calories == TARGETCALORIES and cookie.totalscore > maxwithtarget:
+        maxwithtarget=cookie.totalscore
 
 print("Part 1, max score: ", maxscore)
 print("Part 2, max score: ", maxwithtarget)

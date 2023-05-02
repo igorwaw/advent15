@@ -11,16 +11,15 @@ def parse_data(dict_or_list):
         for v in dict_or_list.values():
             if v=="red":
                 return 0
-            else:
-                if isinstance(v, int):
-                    retval+=v
-                elif isinstance(v, dict) or isinstance(v, list):
-                    retval+=parse_data(v)
+            if isinstance(v, int):
+                retval+=v
+            elif isinstance(v, (dict, list)):
+                retval+=parse_data(v)
     if isinstance(dict_or_list, list):
         for v in dict_or_list:
             if isinstance(v, int):
-                    retval+=v
-            elif isinstance(v, dict) or isinstance(v, list):
+                retval+=v
+            elif isinstance(v, (dict, list)):
                 retval+=parse_data(v)
     return retval
 

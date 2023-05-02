@@ -51,7 +51,7 @@ with open(FILENAME) as inputfile:
         reindeers.append(Reindeer(name, int(speed), int(maxflighttime), int(resttime)))
 
 # do rounds
-for i in range(TIMELIMIT):
+for _ in range(TIMELIMIT):
     for r in reindeers:
         r.do_round()
         maxdistances[r.name]=r.distance

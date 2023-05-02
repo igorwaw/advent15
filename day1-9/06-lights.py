@@ -27,7 +27,7 @@ def run_cmd(cmd):
     elif elems[1]=='off' : rect_off   ( int(elems[2]), int(elems[3]), int(elems[5]), int(elems[6]) )
     else: raise(ValueError)
 
-
+e
 
 ########## FUNCTIONS ################
 
@@ -69,7 +69,7 @@ running=True
 
 
 # initialize the rest
-lights = [[0 for col in range(WIDTH)] for row in range(HEIGHT)]
+lights = [[0 for _ in range(WIDTH)] for _ in range(HEIGHT)]
 with open(INPUTFILE) as inputfile:
     while running:
         for event in pygame.event.get():
@@ -80,7 +80,7 @@ with open(INPUTFILE) as inputfile:
         pygame.display.flip()
         clock.tick(FPS) # wait here
 
-        
+
     #end event loop, cleanup here
     pygame.quit()
     lit=sum(map(sum,lights))
