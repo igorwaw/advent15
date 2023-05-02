@@ -27,9 +27,9 @@ distances, cities=read_input(FILENAME)
 
 routelengths=[]
 for route in permutations(cities):
-    current_dist=0
-    for i in range(len(route)-1):
-        current_dist+=distances[( route[i], route[i+1] )]
+    current_dist = sum(
+        distances[(route[i], route[i + 1])] for i in range(len(route) - 1)
+    )
     routelengths.append(current_dist)
 
 print("Shortest route: ", min(routelengths))

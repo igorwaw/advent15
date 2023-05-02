@@ -12,7 +12,7 @@ rx1=re.compile(r"(\w)\1")
 rx2=re.compile(r'(\w)\w\1')
 rx3=re.compile(r'(\w\w)\w*\1')
 
-def is_nice_1(chstring: str) ->bool:
+def is_nice_1(chstring: str) -> bool:
     for pair in NAUGHTYPAIRS:
         # condition: doesn't contain naughty pair
         if pair in chstring: 
@@ -20,9 +20,7 @@ def is_nice_1(chstring: str) ->bool:
             return False
         # condition: at least 3 vowels
         vowelcounter=Counter(chstring)
-        vowelcount=0
-        for letter in VOWELS:
-            vowelcount += vowelcounter[letter]
+        vowelcount = sum(vowelcounter[letter] for letter in VOWELS)
         if vowelcount<3:
             #print (f"less than 3 vowels ({vowelcount}): {chstring}")
             return False

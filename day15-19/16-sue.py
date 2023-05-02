@@ -47,15 +47,14 @@ for i,aunt in enumerate(aunts):
     itemsmatched=0
 
     for item in aunt:
-        if item[0]=="cats" or item[0]=="trees":
+        if item[0] in ["cats", "trees"]:
             if item[1] > aunt_sender[item[0]]:    
                 itemsmatched+=1
-        elif item[0]=="pomeranians" or item[0]=="goldfish":
+        elif item[0] in ["pomeranians", "goldfish"]:
             if item[1] < aunt_sender[item[0]]:    
                 itemsmatched+=1
-        else:
-            if item[1] == aunt_sender[item[0]]:
-                itemsmatched+=1
+        elif item[1] == aunt_sender[item[0]]:
+            itemsmatched+=1
     if itemsmatched==3:
         print(f"Part 2: aunt {i+1} matches") 
         break

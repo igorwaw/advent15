@@ -5,8 +5,8 @@ from tqdm import tqdm
 TARGETNUMBER=33100000
 LIMIT=TARGETNUMBER//10
 
-houses = [ 0 for x in range(LIMIT) ]
-houses2 = [ 0 for x in range(LIMIT) ]
+houses = [0 for _ in range(LIMIT)]
+houses2 = [0 for _ in range(LIMIT)]
 
 
 for elfnumber in tqdm(range(1, LIMIT)):
@@ -16,7 +16,7 @@ for elfnumber in tqdm(range(1, LIMIT)):
         if numvisit<50:
             numvisit+=1
             houses2[housenumber]+=11*elfnumber
-    
+
 
 
 # find the smallest house number with the specified number of presents:

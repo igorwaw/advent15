@@ -104,12 +104,12 @@ def display_wires(stdscr, wires, iteration, instructions):
         # if we don't have it, print instruction for the wire
         outformat=curses.A_NORMAL
         try:
-            outstring=wire+": "+str(wires[wire])
+            outstring = f"{wire}: {str(wires[wire])}"
             outformat=curses.color_pair(1) # higlight the wires that have the signal
         except KeyError:
-            outstring=wire+": "+value
+            outstring = f"{wire}: {value}"
 
-            
+
         stdscr.addstr(outy, outx, outstring, outformat)
         #stdscr.addstr(outstring, outformat)
         outx+=COLWIDTH
@@ -117,14 +117,14 @@ def display_wires(stdscr, wires, iteration, instructions):
             outx=0
             outy+=1
     # print summary below
-    outstring="Iteration: "+str(iteration)
+    outstring = f"Iteration: {str(iteration)}"
     try:
         a_val=str(wires['a'])
         ending="     PRESS ANY KEY TO CONTINUE"
     except KeyError:
         a_val=instructions['a']
         ending=""
-    outstring+="  current state of a: "+a_val+ending
+    outstring += f"  current state of a: {a_val}{ending}"
     stdscr.addstr(outy+3, 5, outstring, curses.color_pair(1) )
     stdscr.refresh()
 

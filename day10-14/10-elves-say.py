@@ -8,8 +8,7 @@ def look_and_say(number: str) -> str:
     prev_char=number[0]
     streaklen=1
     if len(number)==1: # special case for 1-digit number
-        newnumber='1'+prev_char
-        return newnumber
+        return f'1{prev_char}'
     newnumber=""
     for i in range(1, len(number)):
         next_char=number[i]
