@@ -67,3 +67,15 @@ We need to find the lowest cost of equipment that would win the fight. Easy, the
 so we can just use brute force: generate 1290 players, make them all fight with the boss, create a list of
 cost for the winning players and find a minimum of that list. These are all very fast operations (integer addition,
 subtraction and comparison) so it all runs in just some miliseconds.
+
+# Day 22: Wizard Simulator 20XX
+
+That was a nightmare! While it seemed so similar to the previous puzzle, the code was vastly different.
+And it wasn't that hard to come up with an initial design - I quickly decided I need to check all possible
+games - but debugging took days! I added a lot of additional code to record and visualize (in text mode,
+with curses) possible games. Most of the time I ended up with several winning solutions, including the right
+one, but also with a slightly lower cost. Other times it was the other way around, I missed the right one and
+only got some more expensive.
+
+I used dataclasses heavily. I feel that OOP is the right choice for that kind of problems and dataclass decorator
+allows to skip a lot of boilerplate code. That's defnitely my favourite addition to modern Python.
