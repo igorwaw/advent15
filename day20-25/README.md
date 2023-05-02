@@ -47,7 +47,7 @@ house, initial value 0 (that's a few dozen MB, no problem for a PC)
 number n (eg. elf number ten starts with house 10, than goes to 20, 30 etc.) - which means we don't need
 to start with house 1, increment by 1 and do a modulo operation, instead we can use a proper initial value
 and step in the loop, massively speeding up the calculation
-* For every visited house, incease the number of presents by 10*elf number
+* For every visited house, increase the number of presents by 10*elf number
 * Finally, iterate through the list of houses and find index of the first one that meets our criteria.
 
 ### Use maths
@@ -66,4 +66,4 @@ data. The player has to use a weapon, can use an armor and up to 2 rings. My des
 We need to find the lowest cost of equipment that would win the fight. Easy, there's only 1290 combinations
 so we can just use brute force: generate 1290 players, make them all fight with the boss, create a list of
 cost for the winning players and find a minimum of that list. These are all very fast operations (integer addition,
-substraction and comparison) so it all runs in just some miliseconds.
+subtraction and comparison) so it all runs in just some miliseconds.
