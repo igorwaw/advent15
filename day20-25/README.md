@@ -79,3 +79,13 @@ only got some more expensive.
 
 I used dataclasses heavily. I feel that OOP is the right choice for that kind of problems and dataclass decorator
 allows to skip a lot of boilerplate code. That's defnitely my favourite addition to modern Python.
+
+# Day 23: Opening the Turing Lock
+
+That was fun, except for one trick in the instruction. We're emulating a simple computer (yay!), there's an
+instruction jie - "jump if even", and next one is jio, which I automatically read as "jump if odd", although
+the instruction explained it's "jump if one". Either I'm dumb or that trick is dumb, you decide.
+
+Other than that, it's simple. Match/case to run the right command and some string parsing. Initial version had
+6 more methods, one for each command, but since they were 2-6 lines and even that could be shortened, I moved all
+of that directly into match/case.
