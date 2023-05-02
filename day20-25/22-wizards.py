@@ -187,11 +187,7 @@ def game_round(game: Game, stdscr: curses.window, part2, player_round=True):
         # try to cast spell
         could_not_cast=True
         for spell in spells:
-            already_active=False
-            for i in game.active_effects:
-                if i.number==spell.number:
-                    already_active=True
-            
+            already_active = any(effect.number==spell.number for effect in game.active_effects)
             if not already_active and game.mana>=spell.cost:
                 could_not_cast=False
                 newgame=deepcopy(game)
@@ -201,7 +197,7 @@ def game_round(game: Game, stdscr: curses.window, part2, player_round=True):
         if could_not_cast: 
             game.player_hp=0
             game.check_player_end() # record lost game
-            return                     
+            return
     else: # boss round
         # boss attacks
         attack = max(game.boss_attack-game.armor, 1)
