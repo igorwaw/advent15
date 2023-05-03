@@ -89,6 +89,11 @@ the instruction explained it's "jump if one". Either I'm dumb or that trick is d
 
 Other than that, it's simple. Match/case to run the right command and some string parsing. Initial version had
 6 more methods, one for each command, but since they were 2-6 lines and even that could be shortened, I moved all
-of that directly into match/case.
+of that directly into match/case. To be fair, I could even remove the whole class without affecting the readability
+too much.
 
 ## Day 24: It Hangs in the Balance
+
+Nice to have another simple puzzle, I needed a break after day 22. Combinatorics made easy with itertools module
+and list comprehension.
+
