@@ -1,7 +1,8 @@
-# Day 10: Elves Look, Elves Say
+## Day 10: Elves Look, Elves Say
 
 Now we're checking how fast look-and-say sequence grows (spoiler: fast)
 Easy thing in any language with strings that:
+
 * are dynamic length,
 * can be treated as an array of characters.
 
@@ -13,7 +14,7 @@ Remember to convert integers to strings when needed. And that's it.
 
 Not the prettiest code as there's some repetition, but it's readable and resonably fast.
 
-# Day 11: Corporate Policy
+## Day 11: Corporate Policy
 
 Similar to day 5: Python, regular expressions with backreferences. Bored now.
 
@@ -21,7 +22,7 @@ Huge possibility for optimization. I have 4 very short functions: 1 for incremen
 and 3 for testing each rule. The code can be made much faster - but slightly less readable -
 by inlining.
 
-# Day 12: JSAbacusFramework.io
+## Day 12: JSAbacusFramework.io
 
 For part 1, we need to sum all numbers in the JSON file. We don't really need to parse JSON,
 just extract all the numbers and sum them. A simple regular expression will do for
@@ -39,7 +40,7 @@ recurse into lists and dictionaries.
 Note that explicit type checking is usually frowned upon by Python programmers, but I
 believe it's the right tool for this job.
 
-# Day 13: Knights of the Dinner Table
+## Day 13: Knights of the Dinner Table
 
 Although it doesn't look like that, it's a similar puzzle to day 9, Travelling Santa 
 Problem. So similar that most of my code was actually a copy-paste. Again, it would require
@@ -48,6 +49,7 @@ well do brute-force.
 
 Spoilers below:
 There are 2 key differences between day 9 (distance finding) and this puzzle:
+
 * on day 9, you had to sum up distance from A to B, then B to C etc., here you have
 to sum up happiness from A to B and from B to A, B to C and C to B etc.
 * the table is round, so you have to also add happiness between last person and first
@@ -59,7 +61,7 @@ enough. Though I can clearly see how it grows with the size of the dataset: on a
 laptop it took 0.2s for the first part and 1.4s for the second part with one extra
 person.
 
-# Day 14: Reindeer Olympics
+## Day 14: Reindeer Olympics
 
 Simple thing, nothing more than comparisons and additions. I used a simple class to keep
 the data together.
