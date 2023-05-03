@@ -1,4 +1,4 @@
-# Day 15: Science for Hungry People
+## Day 15: Science for Hungry People
 
 Another combinatorics, who would expect that? We're baking cookies, we only have 4 ingredients
 and we need 100 units in total. There are many ways to achieve this, from (100, 0, 0, 0) to
@@ -8,18 +8,18 @@ it's progressing at all. Turned out that an improved version only needs a second
 really necessary. I made sure I'm filtering the list of combinations before generating
 permutations and that I'm not storing more data than needed.
 
-# Day 16: Aunt Sue
+## Day 16: Aunt Sue
 
 Appareantly, I have 500 aunts names Sue, some of which have a small herd of pomeranians and samoyeds.
 I like the story. The puzzle itself is not that interesting, just some basic input file processing
 with regexps (split() would also work) and few comparisons.
 
-# Day 17: No Such Thing as Too Much
+## Day 17: No Such Thing as Too Much
 
 Another combinatorics? There's so much I might even finally memorize which one is permutation
 and combination! Some copy-paste from day 15 and it's done.
 
-# Day 18: Like a GIF For Your Yard
+## Day 18: Like a GIF For Your Yard
 
 Animated lights, or Conway's Game of Life. As usual, we only need to provide a number for an
 answer, but I couldn't resist making a visualization with Pygame.
@@ -33,7 +33,7 @@ alternate them every other step. How does it affect the problem size? We have 10
 Python's bool is really an integer, a whopping 8 bytes on a 64-bit system, so we have 2 arrays of 80 kB.
 It would be a huge concern on a microcontroller with eg. 64KB of RAM, but on a PC that's nothing.
 
-# Day 19: Medicine for Rudolph
+## Day 19: Medicine for Rudolph
 
 I hated this one.
 
@@ -56,7 +56,7 @@ element, some generate a group containing Rn, Ar and something in between. Some 
 an electron. I tried running them in different orders, trying to eliminate longer pieces first. Reached a dead
 end every time.
 
-In desperation, I based my solution on the analisys by CdiTheKing: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/?utm_source=share&utm_medium=web2x&context=3
+In desperation, I based my solution on the analisys by CdiTheKing: <https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/?utm_source=share&utm_medium=web2x&context=3>
 
 It feels like cheating because I barely understand the reasoning and couldn't reach it myself. But I don't want
 to spend more time on the puzzle that's no fun.
