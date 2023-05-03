@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 
-import logging
 from collections import defaultdict
 import curses
 from parsimonious import Grammar, NodeVisitor, ParseError, VisitationError
@@ -10,19 +9,11 @@ import re
 # input parsing by Dazbo at https://aoc.just2good.co.uk/2015/7
 
 
-logging.basicConfig(
-        filename='07.log', 
-        level=logging.DEBUG, 
-        format='%(asctime)s:%(levelname)s:\t%(message)s')
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-
 
 INPUTFILE="07-input.txt"
 COLWIDTH=20  
-DELAY=300 # 300ms delay to see how signals are calculated
-#DELAY=0 # or no delay to get the answer sooner
+#DELAY=300 # 300ms delay to see how signals are calculated
+DELAY=0 # or no delay to get the answer sooner
 
 grammar = Grammar(r"""
     expr = input? (op input)? feeds wire
@@ -37,7 +28,6 @@ grammar = Grammar(r"""
 
 class BitwiseLogicVisitor(NodeVisitor):
     def parse(self, string_to_parse, wiredict):
-        logger.debug("Parsing %s", string_to_parse)   
 
         self._wires_dict = wiredict
         self._inputs = []             # store int input values, left of the '->'. E.g. [7102, 65023]
@@ -62,7 +52,6 @@ class BitwiseLogicVisitor(NodeVisitor):
             # Where there is no op. E.g. '19138 -> b'
             res = sum(self._inputs)
         self._output[self._target_wire] = res
-        logger.debug("Inputs were: %s, op was: %s, result: %s", self._inputs, self._op, self._output)   
         return self._output
 
     def visit_expr(self, node, visited_children):
@@ -133,20 +122,16 @@ def process_instructions(instructions, blc_visitor, stdscr, wireinstr):
     wire_values = {}
     iteration=0
     while instructions:
-        logger.debug(wire_values)
         iteration+=1
         for i, line in enumerate(instructions):
             try:
                 wire_values.update(blc_visitor.parse(line, wire_values))
                 # if we're here, the instruction parsed successfully, so remove it from the stack permanently
                 popped = instructions.pop(i)
-                logger.debug("Processed: %s", popped)
 
             except ParseError as e:
-                logger.debug(e)
                 continue
             except VisitationError as e:
-                logger.debug(e)
                 continue
 
         # We're ready to process the list again. 

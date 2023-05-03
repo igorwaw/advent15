@@ -9,10 +9,10 @@ INPUTFILE="18-input.txt"
 WIDTH=100
 HEIGHT=100
 LIGHTSIZE=8 # on the screen each light will be 8x8 pixels
-FPS=5 # how many animation frames / calculation steps per second
+FPS=50 # how many animation frames / calculation steps per second
 ROUNDS=100
 
-VARIANT=False # set to False for Part1, True for Part2
+VARIANT=True # set to False for Part1, True for Part2
 
 cwhite=(255,255,255)
 cblack=(0,0,0)

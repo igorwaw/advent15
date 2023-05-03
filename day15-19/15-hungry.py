@@ -3,12 +3,14 @@
 import re
 from itertools import permutations, combinations_with_replacement
 from tqdm import tqdm
+from dataclasses import dataclass
 
 
 FILENAME="15-input.txt"
 MAXSIZE=100
 TARGETCALORIES=500
 
+@dataclass
 class Ingredient:
     name: str
     capacity: int
@@ -16,15 +18,6 @@ class Ingredient:
     flavor: int
     texture: int
     calories: int
-
-    def __init__(self, name: str, capacity: int, durability: int, flavor: int,
-            texture: int, calories: int):
-        self.name = name
-        self.capacity = capacity
-        self.durability = durability
-        self.flavor = flavor
-        self.texture = texture
-        self.calories = calories
 
 
 class Cookie:
@@ -74,8 +67,7 @@ maxscore=0
 maxwithtarget=0
 for recipe in tqdm(ingr_permutations):
     cookie=Cookie(recipe)
-    if cookie.totalscore>maxscore:
-        maxscore=cookie.totalscore
+    maxscore=max(maxscore, cookie.totalscore)
     if cookie.calories == TARGETCALORIES and cookie.totalscore > maxwithtarget:
         maxwithtarget=cookie.totalscore
 
