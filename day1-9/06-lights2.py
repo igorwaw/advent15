@@ -87,7 +87,5 @@ while running:
 #end event loop, cleanup here
 pygame.quit()
 lit=sum(map(sum,lights))
-#for row in range(HEIGHT):
-#    for col in range(WIDTH):
-#        lit+=lights[row][col]
+
 print(f"Total brightness: {lit}")

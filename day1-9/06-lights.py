@@ -27,7 +27,7 @@ def run_cmd(cmd):
     elif elems[1]=='off' : rect_off   ( int(elems[2]), int(elems[3]), int(elems[5]), int(elems[6]) )
     else: raise(ValueError)
 
-e
+
 
 ########## FUNCTIONS ################
 
