@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main() {
-    int TARGETROW=2981;
-    int TARGETCOL=3075;
+    const int TARGETROW=2981;
+    const int TARGETCOL=3075;
 
     const unsigned long long FIRSTCODE=20151125;
     const unsigned long long MULTIPLIER=252533;
