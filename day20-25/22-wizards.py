@@ -26,7 +26,7 @@ class Gamestats:
     games_won: int=0
     games_lost: int=0
     games_pruned: int=0
-    minimal_cost_game: int=5000 # initialize with impossibly high value
+    minimal_cost_game: int=9999 # initialize with impossibly high value
 
     def clear(self):
         self.gamerecorder=[]
@@ -34,7 +34,7 @@ class Gamestats:
         self.games_won=0
         self.games_lost=0
         self.games_pruned=0
-        self.minimal_cost_game=5000
+        self.minimal_cost_game=9999
 
 @dataclass
 class Game:
