@@ -97,3 +97,6 @@ too much.
 Nice to have another simple puzzle, I needed a break after day 22. Combinatorics made easy with itertools module
 and list comprehension.
 
+## Day 25: Let It Snow
+
+Another simple one. So simple I also did it in C.

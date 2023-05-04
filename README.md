@@ -10,10 +10,10 @@ required because I felt like it, for others I went straight to the point.
 
 ![Python](https://img.shields.io/badge/python-3-blue) ![C](https://img.shields.io/badge/C-C99-green)
 
-Tasks 1 and 8 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C
+Tasks 1, 8 and 25 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C
 compiler and with newer standards. 
 
-Other tasks solved with Python. Tested with 3.10 and with 3.6 where possible, most should work with any Python3. I use the following
+Other tasks solved with Python (and 25 in both languages). Tested with 3.10 and with 3.6 where possible, most should work with any Python3. I use the following
 features of modern Python:
 * dataclasses (introduced in 3.7) - day 15, 21 and 22
 * walrus operator (introduced in 3.8) - day 6 and 11
