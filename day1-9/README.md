@@ -32,19 +32,21 @@ updated once in the end (it would slow the calculations too much).
 
 We've got a list of wires that feed signals to other wires through logic gates. We need to know the state of the wire a,
 but for that we need to know the state of the wire lx first. And lx references 2 other wires and so on, until we get
-to the wires that have their state directly in the input file. I chose a simple solution:
+to the wires that have their state directly in the input file. I see two ways to do it:
 
-* iterate through the whole list of wires,
-* at each iteration do all calculations that are possible (the data is already available)
-* I thought it would be cool to see how we get to the result, so I used curses to display the state of the wires in columns,
-update in place and introduce a configurable delay.
+* try to get wire a and do recursion, until you get to the wires with known values
+* or iterate over the list of instructions, at each iteration do all calculations that are possible  (the data is already available) and remove those instructions, until the instruction queue is empty
+
+I thought it would be cool to see how we get to the result, so I used the second approach and displayed the state of the wires in columns,
+with a delay at every step.
 
 ![screenshot](https://github.com/igorwaw/advent15/blob/master/img/day7.png)
 
-For parsing the input file I borrowed the solution from <https://aoc.just2good.co.uk/2015/7> and used the Parsimonious library.
-In the simple case like this it would be faster to use string split, list unpacking and maybe a few simple regexps. But I'm
-doing a lot of parsing in the Advent of Code and the formats are getting more complicated, so it's a good idea to learn a
-proper tool.
+This puzzle gave me some trouble with input parsing. First I borrowed the solution from <https://aoc.just2good.co.uk/2015/7> and
+used the Parsimonious library because I wanted to get to the visualization. It worked, but I wanted to have my own parser,
+no cheating. So I rewrote it using only string splitting and comparisons. It also works, but it's long and there's some code
+repetition.
+
 
 ## Day 8: Matchsticks
 

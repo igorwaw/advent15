@@ -3,82 +3,15 @@
 
 from collections import defaultdict
 import curses
-from parsimonious import Grammar, NodeVisitor, ParseError, VisitationError
 import re
 
-# input parsing by Dazbo at https://aoc.just2good.co.uk/2015/7
 
 
 
 INPUTFILE="07-input.txt"
 COLWIDTH=20  
-#DELAY=300 # 300ms delay to see how signals are calculated
-DELAY=0 # or no delay to get the answer sooner
-
-grammar = Grammar(r"""
-    expr = input? (op input)? feeds wire
-    input = (number / wire) ws+
-    op = ("AND" / "OR" / "LSHIFT" / "RSHIFT" / "NOT") ws+
-    number = ~r"\d+"
-    feeds = "-> "
-    wire = ~r"[a-z]{1,2}"
-    ws = ~r"\s"
-""")
-
-
-class BitwiseLogicVisitor(NodeVisitor):
-    def parse(self, string_to_parse, wiredict):
-
-        self._wires_dict = wiredict
-        self._inputs = []             # store int input values, left of the '->'. E.g. [7102, 65023]
-        self._op = ""                 # E.g. AND
-        self._target_wire = ""        # E.g. n
-        self._processing_input = True # Set to False after we process the '->'
-        self._output = {}             # Initialise empty wire:value dict
-        super().parse(string_to_parse)  
-        if "AND" in self._op:
-            res = self._inputs[0] & self._inputs[1]
-        elif "OR" in self._op:
-            res = self._inputs[0] | self._inputs[1]
-        elif "LSHIFT" in self._op:
-            res = self._inputs[0] << self._inputs[1]
-        elif "RSHIFT" in self._op:
-            res = self._inputs[0] >> self._inputs[1]
-        elif "NOT" in self._op:
-            # The ~ operator in Python may return a signed -ve value.
-            # We don't want this, so we & with a 16 bit mask of all 1s to convert to +ve representation
-            res = ~self._inputs[0] & 0xFFFF
-        else:
-            # Where there is no op. E.g. '19138 -> b'
-            res = sum(self._inputs)
-        self._output[self._target_wire] = res
-        return self._output
-
-    def visit_expr(self, node, visited_children):
-        pass
-
-    def visit_feeds(self, node, visited_children):
-        self._processing_input = False
-
-    def visit_op(self, node, visited_children):
-        self._op = node.text.strip()       
-        return self._op
-
-    def visit_number(self, node, visited_children):
-        number = int(node.text)
-        self._inputs.append(number)
-        return number
-
-    def visit_wire(self, node, visited_children):
-        wire = node.text.strip()
-        if (self._processing_input):
-            # if we have an input wire, then try to extract its numeric value
-            self._inputs.append(self._wires_dict[wire])
-        else:  # otherwise, this is an output wire
-            self._target_wire = wire
-
-    def generic_visit(self, node, visited_children):
-        return visited_children or node
+DELAY=300 # 300ms delay to see how signals are calculated
+#DELAY=0 # or no delay to get the answer sooner
 
 
 
@@ -117,24 +50,106 @@ def display_wires(stdscr, wires, iteration, instructions):
     stdscr.addstr(outy+3, 5, outstring, curses.color_pair(1) )
     stdscr.refresh()
 
+def execute(line : str, wire_values: dict) -> bool:
+    # returns true if instruction executed, false otherwise
+    instr,targetwire=line.split(" -> ")
+    #print(f"{targetwire}: instruction {instr}")
 
-def process_instructions(instructions, blc_visitor, stdscr, wireinstr):
+    splitinstr=instr.split()
+    if len(splitinstr)==1: # either number or another gate
+        return process_assingment(instr, wire_values, targetwire)
+    elif len(splitinstr)==2: # 1-argument command, must be NOT
+        return process_not(splitinstr[1], wire_values, targetwire)
+    else: # 2-argument command - separate functions for readability
+        if splitinstr[1]=="AND":
+            return process_and(splitinstr[0], splitinstr[2], wire_values, targetwire)
+        elif splitinstr[1]=="OR":
+            return process_or(splitinstr[0], splitinstr[2], wire_values, targetwire)
+        elif splitinstr[1]=="LSHIFT":
+            return process_lshift(splitinstr[0], int(splitinstr[2]), wire_values, targetwire)
+        elif splitinstr[1]=="RSHIFT":
+            return process_rshift(splitinstr[0], int(splitinstr[2]), wire_values, targetwire)
+        else:
+            raise ValueError(f"wrong command {splitinstr[1]}")
+
+
+def process_not(sourcewire: str, wire_values: dict, targetwire: str) -> bool:
+    if sourcewire in wire_values:
+        # The ~ operator in Python may return a signed -ve value.
+        # We don't want this, so we & with a 16 bit mask of all 1s to convert to +ve representation
+        wire_values[targetwire] = ~wire_values[sourcewire] & 0xFFFF
+        return True
+    else:
+        return False
+
+
+def process_assingment(instr: str, wire_values: dict, targetwire: str) -> bool:
+    try: # simplest case first: 123 -> x
+        val=int(instr)
+        wire_values[targetwire]=val
+        return True
+    except ValueError: # not a number - another gate then
+        if instr in wire_values:
+            wire_values[targetwire]=wire_values[instr]
+            return True
+        else:
+            return False
+
+
+def process_lshift(sourcewire: str, arg2: int, wire_values: dict, targetwire: str) -> bool:
+    if sourcewire not in wire_values:
+        return False
+    wire_values[targetwire] = wire_values[sourcewire] << arg2
+    return True
+
+def process_rshift(sourcewire: str, arg2: int, wire_values: dict, targetwire: str) -> bool:
+    if sourcewire not in wire_values:
+        return False
+    wire_values[targetwire] = wire_values[sourcewire] >> arg2
+    return True
+
+
+def process_and(arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
+    if arg2 not in wire_values:
+        return False
+    try: # special case - 1st argument is a value not wire
+        value=int(arg1)
+        wire_values[targetwire] = value & wire_values[arg2]
+        return True
+    except ValueError:
+        # normal case - it's a wire
+        if arg1 not in wire_values:
+            return False
+        wire_values[targetwire] = wire_values[arg1] & wire_values[arg2]
+        return True
+
+def process_or(arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
+    if arg2 not in wire_values:
+        return False
+    try: # special case - 1st argument is a value not wire
+        value=int(arg1)
+        wire_values[targetwire] = value | wire_values[arg2]
+        return True
+    except ValueError:
+        # normal case - it's a wire
+        if arg1 not in wire_values:
+            return False
+        wire_values[targetwire] = wire_values[arg1] | wire_values[arg2]
+        return True
+
+
+
+def process_instructions(data, stdscr, wireinstr):
     wire_values = {}
     iteration=0
-    while instructions:
+    while data:
         iteration+=1
-        for i, line in enumerate(instructions):
-            try:
-                wire_values.update(blc_visitor.parse(line, wire_values))
-                # if we're here, the instruction parsed successfully, so remove it from the stack permanently
-                popped = instructions.pop(i)
-
-            except ParseError as e:
-                continue
-            except VisitationError as e:
-                continue
-
-        # We're ready to process the list again. 
+        for line in data[:]:
+            if execute(line, wire_values):
+                # if the instruction worked, remove it from the queue
+                #print(f"removing: {line}")
+                data.remove(line)
+        #print(f"Iteration {iteration} instructions left {len(instructions)}")
         display_wires(stdscr, wire_values, iteration, wireinstr)
         curses.napms(DELAY) # delay so we can see how the values are changing
         #break # for now 1 iteration only
@@ -147,7 +162,7 @@ def main(stdscr):
         data=inputfile.read().splitlines()
 
     # dictionary of instructions, only needed for visualization
-    wireinstr=defaultdict()
+    wireinstr=defaultdict(str)
     for line in data:
         instr,wire=line.split(" -> ")
         instr=instr.strip()
@@ -156,12 +171,11 @@ def main(stdscr):
 
     # some more initialization
     curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
-    blc_visitor = BitwiseLogicVisitor()
-    blc_visitor.grammar = grammar
+    
 
 
     # part 1
-    results = process_instructions(data.copy(), blc_visitor, stdscr, wireinstr)  # main loop goes here
+    results = process_instructions(data.copy(), stdscr, wireinstr)  # main loop goes here
     part1result=results['a']
     stdscr.getch()
     
@@ -169,7 +183,7 @@ def main(stdscr):
     wire_b_instr = list(filter(re.compile(r"-> b$").search, data)) # return only rows that match
     wire_b_instr_index = data.index(wire_b_instr[0])  # the position of this instruction in the list
     data[wire_b_instr_index] = f"{part1result} -> b"  # replace the instruction with this new one
-    results = process_instructions(data.copy(), blc_visitor, stdscr, wireinstr)  # main loop goes here
+    results = process_instructions(data.copy(), stdscr, wireinstr)  # main loop goes here
     part2result=results['a']
     stdscr.getch()
 
