@@ -3,7 +3,6 @@
 from itertools import permutations
 
 
-
 FILENAME="09-input.txt"
 
 def read_input(filename):
@@ -24,6 +23,7 @@ def read_input(filename):
 
 
 distances, cities=read_input(FILENAME)
+
 
 routelengths=[]
 for route in permutations(cities):

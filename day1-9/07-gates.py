@@ -162,7 +162,7 @@ def main(stdscr):
         data=inputfile.read().splitlines()
 
     # dictionary of instructions, only needed for visualization
-    wireinstr=defaultdict(str)
+    wireinstr={}
     for line in data:
         instr,wire=line.split(" -> ")
         instr=instr.strip()
