@@ -32,8 +32,6 @@ class Reindeer:
             self.cycletime=0
 
 
-
-
 # parse input
 reindeers=[]
 maxdistances=defaultdict()
@@ -55,8 +53,9 @@ for _ in range(TIMELIMIT):
 maxscore=0
 for r in reindeers:
     print(r.name, r.score)
-    if r.score > maxscore:
-        maxscore=r.score
+    maxscore=max(maxscore, r.score)
+    #if r.score > maxscore:
+    #    maxscore=r.score
 
 print("Part 1, max distance: ", max(maxdistances.values()))
 print("Part 2, max score: ", maxscore)
