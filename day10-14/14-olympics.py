@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
 from collections import defaultdict
+from dataclasses import dataclass
 
 FILENAME="14-input.txt"
 TIMELIMIT=2503
 
+@dataclass
 class Reindeer:
     # initial data
     name: str
@@ -12,20 +14,11 @@ class Reindeer:
     maxflighttime: int
     resttime: int
     # data that will change
-    distance: int
-    cycletime: int
-    flying: bool
-    score: int
+    distance: int = 0
+    cycletime: int = 0
+    flying: bool = True
+    score: int = 0
     
-    def __init__(self, name: str, speed: int, maxflighttime: int, resttime: int) -> None:
-        self.name=name
-        self.speed=speed
-        self.maxflighttime=maxflighttime
-        self.resttime=resttime
-        self.distance=0
-        self.flying=True
-        self.cycletime=0
-        self.score=0
     
     def do_round(self):
         self.cycletime+=1
@@ -34,10 +27,9 @@ class Reindeer:
             if self.cycletime>=self.maxflighttime:
                 self.flying=False
                 self.cycletime=0
-        else:
-            if self.cycletime>=self.resttime:
-                self.flying=True
-                self.cycletime=0
+        elif self.cycletime>=self.resttime:
+            self.flying=True
+            self.cycletime=0
 
 
 

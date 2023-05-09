@@ -28,7 +28,7 @@ def parse_data(dict_or_list):
 # part 1
 
 result=0
-rx=re.compile( r'(\-?\d+)' )
+rx=re.compile( r'\-?\d+' )
 with open(INPUTFILE) as inputfile:
     for line in inputfile:
         result+=sum( map(int, rx.findall(line) ) )

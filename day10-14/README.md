@@ -26,7 +26,7 @@ by inlining.
 
 For part 1, we need to sum all numbers in the JSON file. We don't really need to parse JSON,
 just extract all the numbers and sum them. A simple regular expression will do for
-extracting and classing map/reduce for the sum. I usually prefer a longer code for
+extracting and classic map/reduce for the sum. I usually prefer a longer code for
 redability's sake, but this just asks for putting all the contents of the main loop in
 one line:
 
@@ -34,7 +34,7 @@ one line:
 
 For part 2, we need to ignore JSON objects (but not lists) that contain a value "red".
 So now we actually have to parse the JSON. I used a recursive function that iterates
-through the data, checks types, adds integers, skips dictionaries if any value is "read",
+through the data, checks types, adds integers, skips dictionaries if any value is "red",
 recurse into lists and dictionaries.
 
 Note that explicit type checking is usually frowned upon by Python programmers, but I
