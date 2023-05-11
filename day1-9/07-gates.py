@@ -51,6 +51,7 @@ def display_wires(stdscr, wires, iteration, instructions):
     stdscr.refresh()
 
 
+
 def execute(line : str, wire_values: dict) -> bool:
     # returns true if instruction executed, false otherwise
     instr,targetwire=line.split(" -> ")
@@ -59,11 +60,9 @@ def execute(line : str, wire_values: dict) -> bool:
     match splitinstr:=instr.split():
         case (arg1, "AND", arg2): return process_and(arg1, arg2, wire_values, targetwire)
         case (arg1, "OR", arg2): return process_or(arg1, arg2, wire_values, targetwire)
-        case (arg1, "LSHIFT", arg2): return process_lshift(arg1, int(arg2), wire_values, targetwire)
-        case (arg1, "RSHIFT", arg2): return process_rshift(arg1, int(arg2), wire_values, targetwire)
+        case (arg1, "LSHIFT"|"RSHIFT", arg2): return process_shift(splitinstr[1], arg1, int(arg2), wire_values, targetwire)
         case ("NOT", arg1): return process_not(arg1, wire_values, targetwire)
         case _:  return process_assingment(splitinstr[0], wire_values, targetwire)
-
 
 
 
@@ -90,18 +89,16 @@ def process_assingment(instr: str, wire_values: dict, targetwire: str) -> bool:
         else:
             return False
 
-
-def process_lshift(sourcewire: str, arg2: int, wire_values: dict, targetwire: str) -> bool:
+def process_shift(operation: str, sourcewire: str, arg2: int, wire_values: dict, targetwire: str) -> bool:
     if sourcewire not in wire_values:
         return False
-    wire_values[targetwire] = wire_values[sourcewire] << arg2
+    if operation=="LSHIFT":
+        wire_values[targetwire] = wire_values[sourcewire] << arg2
+    else:
+        wire_values[targetwire] = wire_values[sourcewire] >> arg2
     return True
 
-def process_rshift(sourcewire: str, arg2: int, wire_values: dict, targetwire: str) -> bool:
-    if sourcewire not in wire_values:
-        return False
-    wire_values[targetwire] = wire_values[sourcewire] >> arg2
-    return True
+
 
 
 def process_and(arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
