@@ -58,13 +58,10 @@ def execute(line : str, wire_values: dict) -> bool:
     #print(f"{targetwire}: instruction {instr}")
 
     match splitinstr:=instr.split():
-        case (arg1, "AND", arg2): return process_and(arg1, arg2, wire_values, targetwire)
-        case (arg1, "OR", arg2): return process_or(arg1, arg2, wire_values, targetwire)
+        case (arg1, "AND"|"OR", arg2): return process_andor(splitinstr[1], arg1, arg2, wire_values, targetwire)
         case (arg1, "LSHIFT"|"RSHIFT", arg2): return process_shift(splitinstr[1], arg1, int(arg2), wire_values, targetwire)
         case ("NOT", arg1): return process_not(arg1, wire_values, targetwire)
         case _:  return process_assingment(splitinstr[0], wire_values, targetwire)
-
-
 
 
 def process_not(sourcewire: str, wire_values: dict, targetwire: str) -> bool:
@@ -99,36 +96,19 @@ def process_shift(operation: str, sourcewire: str, arg2: int, wire_values: dict,
     return True
 
 
-
-
-def process_and(arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
+def process_andor(operation: str, arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
     if arg2 not in wire_values:
         return False
     try: # special case - 1st argument is a value not wire
         value=int(arg1)
-        wire_values[targetwire] = value & wire_values[arg2]
+        wire_values[targetwire] = value & wire_values[arg2] if operation=="AND" else value | wire_values[arg2]
         return True
     except ValueError:
         # normal case - it's a wire
         if arg1 not in wire_values:
             return False
-        wire_values[targetwire] = wire_values[arg1] & wire_values[arg2]
+        wire_values[targetwire] = wire_values[arg1] & wire_values[arg2] if operation=="AND" else wire_values[arg1] | wire_values[arg2]
         return True
-
-def process_or(arg1: str, arg2: str, wire_values: dict, targetwire: str) -> bool:
-    if arg2 not in wire_values:
-        return False
-    try: # special case - 1st argument is a value not wire
-        value=int(arg1)
-        wire_values[targetwire] = value | wire_values[arg2]
-        return True
-    except ValueError:
-        # normal case - it's a wire
-        if arg1 not in wire_values:
-            return False
-        wire_values[targetwire] = wire_values[arg1] | wire_values[arg2]
-        return True
-
 
 
 def process_instructions(data, stdscr, wireinstr):
@@ -144,7 +124,6 @@ def process_instructions(data, stdscr, wireinstr):
         #print(f"Iteration {iteration} instructions left {len(instructions)}")
         display_wires(stdscr, wire_values, iteration, wireinstr)
         curses.napms(DELAY) # delay so we can see how the values are changing
-        #break # for now 1 iteration only
     return wire_values
 
 
