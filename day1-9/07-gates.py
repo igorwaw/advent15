@@ -50,27 +50,22 @@ def display_wires(stdscr, wires, iteration, instructions):
     stdscr.addstr(outy+3, 5, outstring, curses.color_pair(1) )
     stdscr.refresh()
 
+
 def execute(line : str, wire_values: dict) -> bool:
     # returns true if instruction executed, false otherwise
     instr,targetwire=line.split(" -> ")
     #print(f"{targetwire}: instruction {instr}")
 
-    splitinstr=instr.split()
-    if len(splitinstr)==1: # either number or another gate
-        return process_assingment(instr, wire_values, targetwire)
-    elif len(splitinstr)==2: # 1-argument command, must be NOT
-        return process_not(splitinstr[1], wire_values, targetwire)
-    else: # 2-argument command - separate functions for readability
-        if splitinstr[1]=="AND":
-            return process_and(splitinstr[0], splitinstr[2], wire_values, targetwire)
-        elif splitinstr[1]=="OR":
-            return process_or(splitinstr[0], splitinstr[2], wire_values, targetwire)
-        elif splitinstr[1]=="LSHIFT":
-            return process_lshift(splitinstr[0], int(splitinstr[2]), wire_values, targetwire)
-        elif splitinstr[1]=="RSHIFT":
-            return process_rshift(splitinstr[0], int(splitinstr[2]), wire_values, targetwire)
-        else:
-            raise ValueError(f"wrong command {splitinstr[1]}")
+    match splitinstr:=instr.split():
+        case (arg1, "AND", arg2): return process_and(arg1, arg2, wire_values, targetwire)
+        case (arg1, "OR", arg2): return process_or(arg1, arg2, wire_values, targetwire)
+        case (arg1, "LSHIFT", arg2): return process_lshift(arg1, int(arg2), wire_values, targetwire)
+        case (arg1, "RSHIFT", arg2): return process_rshift(arg1, int(arg2), wire_values, targetwire)
+        case ("NOT", arg1): return process_not(arg1, wire_values, targetwire)
+        case _:  return process_assingment(splitinstr[0], wire_values, targetwire)
+
+
+
 
 
 def process_not(sourcewire: str, wire_values: dict, targetwire: str) -> bool:
