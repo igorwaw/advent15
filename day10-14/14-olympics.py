@@ -54,8 +54,6 @@ maxscore=0
 for r in reindeers:
     print(r.name, r.score)
     maxscore=max(maxscore, r.score)
-    #if r.score > maxscore:
-    #    maxscore=r.score
 
 print("Part 1, max distance: ", max(maxdistances.values()))
 print("Part 2, max score: ", maxscore)
