@@ -13,13 +13,13 @@ required because I felt like it, for others I went straight to the point.
 Tasks 1, 8 and 25 solved with C. I used C99 standard and only tested with GCC 12.2.0, but it should work with any C
 compiler and with newer standards. 
 
-Other tasks solved with Python (and 25 in both languages). Tested with 3.10 and with 3.6 where possible, most should work with any Python3. I use the following
-features of modern Python:
+Other tasks solved with Python (and 25 in both languages). Tested with 3.10 and with 3.6 where possible, most
+should work with Python 3.6 or newer. I use the following features of modern Python:
 
 * dataclasses (introduced in 3.7) - day 14, 15, 21 and 22
-* walrus operator (introduced in 3.8) - day 6 and 11
+* walrus operator (introduced in 3.8) - day 6, 7 and 11
 * math.prod (introduced in 3.8) - day 24
-* match/case  (introduced in 3.10) - day 23
+* match/case  (introduced in 3.10) - day 7 and 23
 
 Extra Python libraries:
 
