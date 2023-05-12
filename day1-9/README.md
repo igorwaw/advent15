@@ -44,8 +44,9 @@ with a delay at every step.
 
 This puzzle gave me some trouble with input parsing. First I borrowed the solution from <https://aoc.just2good.co.uk/2015/7> and
 used the Parsimonious library because I wanted to get to the visualization. It worked, but I wanted to have my own parser,
-no cheating. So I rewrote it using only string splitting and comparisons. It also works, but it's long and there's some code
-repetition.
+no cheating. So I rewrote it using only string splitting and comparisons. It also worked, but it was long and there was some code
+repetition. Then I replaced if/else with match/case, moved l/r shift to one function, and/or to one function - there's still
+some code repetition but much less.
 
 
 ## Day 8: Matchsticks
